@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Browser Tab Title -->
+    <title>Javascript Data-to-Chart Application</title>
+
+    <!-- This is the Chart JS import -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS Styling for webpage -->
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Title at top of page -->
+        <div id="title">
+            <h1>Javascript Data-to-Chart Application</h1>
+            <h2>CS2613: Alex Boudreau - 3747189</h2>
+        </div>
+
+        <!-- File Input -->
+        <div id="inputText">Please select a CSV file:</div>
+        <div id="inputContainer">
+            <!-- File Input Button -->
+            <input type="file" id="fileInput" accept=".csv">
+        </div>
+
+        <div>
+            <!-- Button to Generate Charts -->
+            <button id="generateButton">Generate Charts</button>
+            <!-- Buttons to Generate specific types of Charts -->
+            <button class="chartTypeButton" data-type="line">Generate Line Chart</button>
+            <button class="chartTypeButton" data-type="bar">Generate Bar Chart</button>
+            <button class="chartTypeButton" data-type="radar">Generate Radar Chart</button>
+            <button class="chartTypeButton" data-type="pie">Generate Pie Chart</button>
+            <button class="chartTypeButton" data-type="doughnut">Generate Doughnut Chart</button>
+        </div>
+
+        <!-- Charts that will be displayed once generated -->
+        <div id="charts" style="display: none;"></div>
+    </div>
+
+    <!-- Adding javascript to handle input and generate the charts -->
+    <script src="chartScript.js"></script>
+
+    <script>
+        // Generate all charts when the Generate Charts button is pressed
+        document.getElementById('generateButton').addEventListener('click', function () {
+            inputFile(document.getElementById('fileInput').files);
+        });
+
+        // Generate specified chart when Generate "Chart Type" Chart button is pressed
+        const chartTypeButtons = document.querySelectorAll('.chartTypeButton'); // Get all buttons for chart types
+        chartTypeButtons.forEach(button => { // Add event listener to each button
+            button.addEventListener('click', function () {
+                const chartType = button.getAttribute('data-type'); // Get the chart type from the button
+                inputFile(document.getElementById('fileInput').files, chartType);
+            });
+        });
+    </script>
+</body>
+
+</html>
